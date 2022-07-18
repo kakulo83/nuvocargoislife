@@ -1,0 +1,28 @@
+Style/Documentation:
+  Enabled: False
+Metrics/MethodLength:
+  Enabled: False
+Metrics/AbcSize:
+  Enabled: False
+Metrics/CyclomaticComplexity:
+  Enabled: False
+Metrics/PerceivedComplexity:
+  Enabled: False
+Naming/MethodParameterName:
+  Enabled: False
+Style/BlockComments:
+  Enabled: False
+Style/IdenticalConditionalBranches:
+  Enabled: False
+Layout/EmptyLines:
+  Enabled: False
+Style/ParallelAssignment:
+  Enabled: False
+Style/NumericPredicate:
+  Enabled: False
+Style/IfUnlessModifier:
+  Enabled: False
+Naming/PredicateName:
+  Enabled: False
+Metrics/BlockLength:
+  Enabled: False
