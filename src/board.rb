@@ -4,35 +4,37 @@ NUM_ROWS = 10
 NUM_COLUMNS = 10
 
 class Board
-  def initialize(rows = NUM_ROWS, columns = NUM_COLUMNS, initial_state)
-    # We use a 'buffer' grid to write the new state, calculating it from the old grid state
-    @old_grid = Array.new(rows, Array.new(columns, 0))
-    @current_grid = Array.new(rows, Array.new(columns, 0))
-    @rows = rows
-    @columns = columns
-
+  def initialize(rows = NUM_ROWS, columns = NUM_COLUMNS, initial_state: nil)
     if initial_state
-      # consume inital_state and populate grid accordingly
+      @rows = initial_state.count
+      @columns = initial_state.first.count
+      @board = initial_state
+      @buffer_board = Array.new(@rows, Array.new(@columns, 0))
+    else
+      @rows = rows
+      @columns = columns
+      @board = Array.new(rows, Array.new(columns, 0))
+      @buffer_board = Array.new(rows, Array.new(columns, 0))
     end
   end
 
   attr_reader :rows, :columns
 
-  def each_cell
-    @old_grid.each_with_index do |row, x|
-      row.each_with_index do |state, y|
+  def each_cell!
+    @buffer_board = @board.each_with_index.map do |row, x|
+      row.each_with_index.map do |state, y|
         yield x, y, state
       end
     end
-    @old_grid = @current_grid
+    @board = @buffer_board
   end
 
   def [](x, y)
-    @old_grid[x][y]
+    @board[x][y]
   end
 
   def []=(x, y, state)
-    @current_grid[x][y] = state
+    @board[x][y] = state
   end
 
   def render
